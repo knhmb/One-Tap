@@ -1,16 +1,17 @@
 <template>
   <the-header></the-header>
-  <Home />
+  <router-view></router-view>
+  <the-footer></the-footer>
 </template>
 
 <script>
 import TheHeader from "./components/common/TheHeader.vue";
-import Home from "./pages/Home.vue";
+import TheFooter from "./components/common/TheFooter.vue";
 
 export default {
   components: {
     TheHeader,
-    Home,
+    TheFooter,
   },
 };
 </script>

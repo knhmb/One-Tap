@@ -25,9 +25,13 @@ export default {
 </script>
   
   <style scoped>
+.contact {
+  height: 100%;
+}
+
 .contact .card {
   background: #f3f3f5;
-  min-height: 14rem;
+  height: 100%;
 }
 
 .contact p {

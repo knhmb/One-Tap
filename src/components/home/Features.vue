@@ -14,6 +14,20 @@
             </p>
           </div>
         </el-col>
+        <el-col>
+          <img src="../../assets/link@2x.png" alt="" />
+          <div class="text">
+            <p>Link to your socials</p>
+            <p>Your followers can find you on other platforms</p>
+          </div>
+        </el-col>
+        <el-col>
+          <img src="../../assets/web-based@2x.png" alt="" />
+          <div class="text">
+            <p>Web based</p>
+            <p>No need to install anything</p>
+          </div>
+        </el-col>
       </el-row>
       <!-- <div class="features-content">
 
@@ -23,9 +37,14 @@
 </template>
 
 <style scoped>
+.features {
+  height: 100%;
+}
+
 .features .card {
   background: #d5f7e8;
-  max-height: 14rem;
+  height: 100%;
+  /* min-height: 23rem; */
 }
 
 .features h2 {
@@ -47,6 +66,10 @@
 .features .el-col {
   display: flex;
   align-items: center;
+}
+
+.features .el-col:not(:last-of-type) {
+  margin-bottom: 1rem;
 }
 
 .features .el-col img {

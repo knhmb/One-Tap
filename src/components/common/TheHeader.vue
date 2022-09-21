@@ -6,7 +6,7 @@
           <img class="logo" src="../../assets/brand-logo@2x.png" alt="" />
         </el-col>
         <el-col :span="21">
-          <el-dropdown>
+          <el-dropdown popper-class="language-dropdown">
             <span class="el-dropdown-link">
               English
               <el-icon class="el-icon--right">
@@ -66,6 +66,26 @@ img.logo {
   line-height: 24px;
   letter-spacing: 0.02em;
   color: #ffffff;
-  padding: 0.5rem 1.5rem;
+  padding: 1.2rem 1.5rem;
+}
+
+.el-dropdown-link.el-tooltip__trigger.el-tooltip__trigger {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #262626;
+}
+</style>
+
+<style>
+.language-dropdown .el-dropdown-menu__item {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #262626;
 }
 </style>
