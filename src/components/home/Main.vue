@@ -3,7 +3,7 @@
     <base-container>
       <div class="outer-container">
         <el-row :gutter="1">
-          <el-col :span="17">
+          <el-col :sm="24" :md="17">
             <base-card>
               <h5>one tap digital business card</h5>
               <h2>
@@ -19,7 +19,17 @@
               <el-button>Get Started</el-button>
             </base-card>
           </el-col>
-          <el-col :span="7">
+          <el-col class="hide-small" :sm="24" :md="7">
+            <base-card>
+              <img
+                class="hand-arrow"
+                src="../../assets/handdraw-arrow@2x.png"
+                alt=""
+              />
+              <img src="../../assets/key-visual-combine@2x.png" alt="" />
+            </base-card>
+          </el-col>
+          <el-col class="hide-large" :sm="24" :lg="7">
             <base-card>
               <img
                 class="hand-arrow"
@@ -31,13 +41,13 @@
           </el-col>
         </el-row>
         <el-row :gutter="1">
-          <el-col :span="8">
+          <el-col :sm="24" :md="8">
             <Features />
           </el-col>
-          <el-col :span="8">
+          <el-col :sm="24" :md="8">
             <Contact />
           </el-col>
-          <el-col :span="8">
+          <el-col :sm="24" :md="8">
             <save-the-planet></save-the-planet>
           </el-col>
         </el-row>
@@ -64,6 +74,7 @@ export default {
 .home-banner {
   background: #f3f3f5;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .home-banner .container {
@@ -134,11 +145,22 @@ export default {
   margin-top: 1rem;
 }
 
+.home-banner .outer-container .hide-large {
+  display: none;
+}
+
 .home-banner .outer-container .el-col:has(img.hand-arrow) .card {
   height: 100%;
 }
 
-.home-banner .outer-container img.hand-arrow {
+.home-banner .outer-container .hide-large img.hand-arrow {
+  width: 10rem;
+  /* top: 5rem;
+  right: 32rem; */
+  /* position: absolute; */
+}
+
+.home-banner .outer-container .hide-small img.hand-arrow {
   width: 14rem;
   /* margin-left: -30rem; */
   top: 5rem;
@@ -147,16 +169,54 @@ export default {
   position: absolute;
 }
 
-.home-banner .outer-container img.hand-arrow + img {
+.home-banner .outer-container .hide-small img.hand-arrow + img {
   width: 39.9rem;
   position: absolute;
   right: -2.4rem;
   /* left: 44rem; */
   bottom: 0;
 }
+.home-banner .outer-container .hide-large img.hand-arrow + img {
+  width: 20rem;
+  /* position: absolute;
+  right: -2.4rem;
+  bottom: 0; */
+}
 
 .home-banner .outer-container .el-col:has(img.hand-arrow) .card {
   display: flex;
   align-items: flex-start;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1300px) {
+  .home-banner .outer-container .hide-small img.hand-arrow {
+    width: 10rem;
+    right: 20rem;
+    /* top: 1rem; */
+  }
+
+  .home-banner .outer-container .hide-small img.hand-arrow + img {
+    width: 33rem;
+    right: -4rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .home-banner .outer-container .hide-large {
+    display: block;
+  }
+  .home-banner .outer-container .hide-small {
+    display: none;
+  }
+
+  .home-banner .outer-container .el-col:has(img.hand-arrow) .card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-banner .outer-container .card h2 {
+    font-size: 50px;
+  }
 }
 </style>
