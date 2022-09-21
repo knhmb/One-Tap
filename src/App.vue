@@ -1,7 +1,7 @@
 <template>
-  <the-header></the-header>
+  <the-header v-if="$route.path !== '/home-user'"></the-header>
   <router-view></router-view>
-  <the-footer></the-footer>
+  <the-footer v-if="$route.path !== '/home-user'"></the-footer>
 </template>
 
 <script>
