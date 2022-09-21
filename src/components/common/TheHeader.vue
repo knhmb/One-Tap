@@ -20,19 +20,35 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <el-button round>Get Started</el-button>
+          <el-button @click="openDialog" round>Get Started</el-button>
         </el-col>
       </el-row>
     </base-container>
+    <auth-dialog
+      :dialog-visible="dialogVisible"
+      @closeDialog="dialogVisible = $event"
+    ></auth-dialog>
   </header>
 </template>
 
 <script>
 import { ArrowDown } from "@element-plus/icons-vue";
+import AuthDialog from "./AuthDialog.vue";
 
 export default {
   components: {
     ArrowDown,
+    AuthDialog,
+  },
+  data() {
+    return {
+      dialogVisible: false,
+    };
+  },
+  methods: {
+    openDialog() {
+      this.dialogVisible = true;
+    },
   },
 };
 </script>
