@@ -22,9 +22,20 @@
           <el-button>Copy</el-button>
         </div>
       </div>
+      <personal-information></personal-information>
     </base-container>
   </section>
 </template>
+
+<script>
+import PersonalInformation from "@/components/user-profile/PersonalInformation.vue";
+
+export default {
+  components: {
+    PersonalInformation,
+  },
+};
+</script>
 
 <style scoped>
 .user-profile {
@@ -33,8 +44,8 @@
 }
 
 .user-profile .container {
-  padding-right: 18rem;
-  padding-left: 18rem;
+  padding-right: 15rem;
+  padding-left: 15rem;
 }
 
 .user-profile .top-section {
