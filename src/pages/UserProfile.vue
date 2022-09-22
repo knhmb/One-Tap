@@ -2,15 +2,23 @@
   <section class="user-profile">
     <base-container>
       <div class="top-section">
-        <div class="pill">
-          <img src="../assets/profile-on-off@2x.png" alt="" />
+        <div
+          :class="{ 'is-active': $route.path === '/user-profile/profile' }"
+          @click="navigate('profile')"
+          class="pill"
+        >
+          <img :src="profileImg" alt="" />
           <p>Profile</p>
         </div>
-        <div class="pill">
-          <img src="../assets/content-off@2x.png" alt="" />
+        <div
+          :class="{ 'is-active': $route.path === '/user-profile/content' }"
+          @click="navigate('content')"
+          class="pill"
+        >
+          <img :src="contentImg" alt="" />
           <p>Content</p>
         </div>
-        <div class="pill">
+        <div @click="$router.replace('/')" class="pill">
           <img src="../assets/logout-on-off@2x.png" alt="" />
           <p>Logout</p>
         </div>
@@ -22,17 +30,48 @@
           <el-button>Copy</el-button>
         </div>
       </div>
-      <personal-information></personal-information>
+      <router-view></router-view>
+      <!-- <personal-information></personal-information>
+      <change-password></change-password> -->
     </base-container>
   </section>
 </template>
 
 <script>
-import PersonalInformation from "@/components/user-profile/PersonalInformation.vue";
-
 export default {
-  components: {
-    PersonalInformation,
+  data() {
+    return {
+      profileImg: require("../assets/profile-on-off@2x.png"),
+      contentImg: require("../assets/content-off@2x.png"),
+    };
+  },
+  watch: {
+    $route: {
+      deep: true,
+      handler() {
+        this.$route.path === "/user-profile/profile"
+          ? (this.profileImg = require("../assets/profile-on@2x.png"))
+          : (this.profileImg = require("../assets/profile-on-off@2x.png"));
+
+        this.$route.path === "/user-profile/content"
+          ? (this.contentImg = require("../assets/content-on@2x.png"))
+          : (this.contentImg = require("../assets/content-off@2x.png"));
+      },
+    },
+  },
+  methods: {
+    navigate(path) {
+      this.$router.push({ name: path });
+    },
+  },
+  created() {
+    this.$route.path === "/user-profile/profile"
+      ? (this.profileImg = require("../assets/profile-on@2x.png"))
+      : (this.profileImg = require("../assets/profile-on-off@2x.png"));
+
+    this.$route.path === "/user-profile/content"
+      ? (this.contentImg = require("../assets/content-on@2x.png"))
+      : (this.contentImg = require("../assets/content-off@2x.png"));
   },
 };
 </script>
@@ -41,6 +80,7 @@ export default {
 .user-profile {
   background: #f3f3f5;
   border-top: 1px solid #000000;
+  min-height: 100vh;
 }
 
 .user-profile .container {
@@ -65,6 +105,11 @@ export default {
   cursor: pointer;
 }
 
+.user-profile .top-section .pill.is-active {
+  background: #0093e9;
+  border-color: #0093e9;
+}
+
 .user-profile .top-section .pill:last-of-type {
   width: 100%;
   justify-content: space-between;
@@ -82,6 +127,10 @@ export default {
   line-height: 24px;
   letter-spacing: -0.02em;
   color: #262626;
+}
+
+.user-profile .top-section .pill.is-active p {
+  color: #fff;
 }
 
 .user-profile .pill .text p:first-of-type {
@@ -102,6 +151,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: #0093e9;
+  word-break: break-all;
 }
 
 .user-profile .pill .el-button {
@@ -116,5 +166,16 @@ export default {
   line-height: 24px;
   letter-spacing: -0.02em;
   color: #262626;
+}
+
+@media screen and (max-width: 1140px) {
+  .user-profile .container {
+    padding-right: 2rem;
+    padding-left: 3rem;
+  }
+
+  .user-profile .top-section {
+    flex-wrap: wrap;
+  }
 }
 </style>
