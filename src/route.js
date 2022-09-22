@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "./pages/Home";
 import HomeUser from "./pages/HomeUser";
+import UserProfile from "./pages/UserProfile";
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -28,6 +29,10 @@ const router = createRouter({
     {
       path: "/home-user",
       component: HomeUser,
+    },
+    {
+      path: "/user-profile",
+      component: UserProfile,
     },
   ],
 });

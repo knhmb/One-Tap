@@ -1,28 +1,47 @@
 <template>
-  <section class="auth">
-    <el-dialog
-      @close="closeDialog"
-      :model-value="dialogVisible"
-      title="Tips"
-      width="30%"
-      :before-close="handleClose"
-    >
-      <Login v-if="authOption === 'login'" />
-      <Register v-if="authOption === 'register'" />
-    </el-dialog>
-  </section>
+  <div class="login">
+    <h3>Welcome</h3>
+    <p class="login-message">Login to your ONE TAP account</p>
+    <el-form>
+      <el-form-item>
+        <p class="label-username">Username</p>
+        <el-input
+          v-model="ruleForm.username"
+          @blur="
+            unFocused({ label: '.label-username', input: ruleForm.username })
+          "
+          @focus="focus('.label-username')"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <p class="label-password">Password</p>
+        <el-input
+          type="password"
+          show-password
+          v-model="ruleForm.password"
+          @blur="
+            unFocused({ label: '.label-password', input: ruleForm.password })
+          "
+          @focus="focus('.label-password')"
+        ></el-input>
+      </el-form-item>
+      <div class="remember-me">
+        <el-form-item>
+          <el-checkbox v-model="ruleForm.rememberMe" label="Remember me" />
+        </el-form-item>
+        <p>Forgot Password?</p>
+      </div>
+      <el-button>Login</el-button>
+      <p class="no-account">
+        Don’t have an account? <span @click="register">Sign up</span>
+      </p>
+    </el-form>
+  </div>
 </template>
-
-<script>
-import Login from "../Login.vue";
-import Register from "../Register.vue";
-
+  
+  <script>
 export default {
   props: ["dialogVisible"],
-  components: {
-    Login,
-    Register,
-  },
   data() {
     return {
       ruleForm: {
@@ -32,37 +51,26 @@ export default {
       },
     };
   },
-  computed: {
-    authOption() {
-      return this.$store.getters.authOption;
-    },
-  },
   methods: {
-    focus() {
-      const el = document.querySelector(".label-username");
+    focus(item) {
+      const el = document.querySelector(item);
       el.style.top = "20%";
     },
-    focusPassword() {
-      const el = document.querySelector(".label-password");
-      el.style.top = "20%";
-    },
-    unFocused() {
-      const el = document.querySelector(".label-username");
+    unFocused({ label, input }) {
+      const el = document.querySelector(label);
+      if (input) {
+        return;
+      }
       el.style.top = "50%";
     },
-    unFocusedPassword() {
-      const el = document.querySelector(".label-password");
-      el.style.top = "50%";
-    },
-    closeDialog() {
-      this.$store.commit("CHANGE_AUTH_OPTION", "login");
-      this.$emit("closeDialog", false);
+    register() {
+      this.$store.commit("CHANGE_AUTH_OPTION", "register");
     },
   },
 };
 </script>
-
-<style scoped>
+  
+  <style scoped>
 .auth :deep(.el-dialog) {
   background: #f3f3f5;
   border: 1px solid #000000;
@@ -119,7 +127,7 @@ export default {
 
 .auth .el-form .el-input :deep(.el-input__wrapper) {
   /* border: 1px solid #0e74bd;
-  box-shadow: 0px 0px 0px 4px rgba(14, 116, 189, 0.15); */
+    box-shadow: 0px 0px 0px 4px rgba(14, 116, 189, 0.15); */
   border-radius: 12px;
   padding: 0.5rem 1rem;
 }
@@ -187,5 +195,6 @@ export default {
   font-weight: 600;
   letter-spacing: -0.02em;
   color: #0e74bd;
+  cursor: pointer;
 }
 </style>
