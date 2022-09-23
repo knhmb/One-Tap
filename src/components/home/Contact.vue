@@ -2,7 +2,7 @@
   <div class="contact">
     <base-card>
       <p>Have questions about our products and services?</p>
-      <el-button :icon="Right"
+      <el-button @click="$router.push('/contact-us')" :icon="Right"
         >Contact us <el-icon><Right /></el-icon
       ></el-button>
     </base-card>

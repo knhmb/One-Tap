@@ -1,11 +1,11 @@
 <template>
-  <section class="about-us">
+  <section class="contact-us">
     <base-container>
       <div class="card">
         <el-row :gutter="1">
           <el-col :sm="24" :md="10">
             <base-card>
-              <h2>About us</h2>
+              <h2>Contact us</h2>
             </base-card>
           </el-col>
           <el-col :sm="24" :md="14">
@@ -78,36 +78,36 @@
     </base-container>
   </section>
 </template>
-
-<style scoped>
-.about-us {
+  
+  <style scoped>
+.contact-us {
   background: #f3f3f5;
 }
 
-.about-us .card {
+.contact-us .card {
   background: #262626;
   min-height: 100vh;
   padding: 1px;
 }
 
-/* .about-us .card .el-row .el-col {
-  padding: 4rem 2rem;
-} */
+/* .contact-us .card .el-row .el-col {
+    padding: 4rem 2rem;
+  } */
 
-.about-us .card .el-row .el-col:first-of-type .card {
+.contact-us .card .el-row .el-col:first-of-type .card {
   background: #d5f7e8;
   border-radius: 24px;
   padding: 4rem 2rem;
   height: 100%;
 }
 
-.about-us .card .el-row .el-col:last-of-type .card {
+.contact-us .card .el-row .el-col:last-of-type .card {
   background: #fafafa;
   border-radius: 24px;
   padding: 4rem 2rem;
 }
 
-.about-us .card h2 {
+.contact-us .card h2 {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 900;
@@ -117,7 +117,7 @@
   color: #262626;
 }
 
-.about-us .card p.heading {
+.contact-us .card p.heading {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
@@ -127,7 +127,7 @@
   margin-bottom: 1rem;
 }
 
-.about-us .card p.description {
+.contact-us .card p.description {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
@@ -138,15 +138,15 @@
 }
 
 @media screen and (max-width: 991px) {
-  .about-us .card h2 {
+  .contact-us .card h2 {
     font-size: 55px;
   }
 
-  .about-us .card .el-row .el-col:first-of-type .card {
+  .contact-us .card .el-row .el-col:first-of-type .card {
     padding: 4rem 1rem;
   }
 
-  .about-us .card .el-row .el-col:last-of-type .card {
+  .contact-us .card .el-row .el-col:last-of-type .card {
     padding: 4rem 1rem;
   }
 }

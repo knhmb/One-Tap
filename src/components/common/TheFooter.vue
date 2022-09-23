@@ -9,8 +9,8 @@
         </el-col>
         <el-col :sm="24" :md="12">
           <p @click="navigate('/about-us')">About us</p>
-          <p>Contact us</p>
-          <p>Terms & Conditions</p>
+          <p @click="navigate('/contact-us')">Contact us</p>
+          <p @click="navigate('/terms-and-conditions')">Terms & Conditions</p>
         </el-col>
       </el-row>
     </base-container>

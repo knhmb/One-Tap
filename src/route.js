@@ -6,6 +6,8 @@ import UserProfile from "./pages/UserProfile";
 import Profile from "./pages/Profile";
 import Content from "./pages/Content";
 import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -36,6 +38,14 @@ const router = createRouter({
     {
       path: "/about-us",
       component: AboutUs,
+    },
+    {
+      path: "/contact-us",
+      component: ContactUs,
+    },
+    {
+      path: "/terms-and-conditions",
+      component: TermsAndConditions,
     },
     {
       path: "/user-profile",
