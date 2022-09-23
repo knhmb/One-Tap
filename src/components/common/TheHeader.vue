@@ -3,7 +3,12 @@
     <base-container>
       <el-row>
         <el-col :span="3">
-          <img class="logo" src="../../assets/brand-logo@2x.png" alt="" />
+          <img
+            @click="$router.push('/')"
+            class="logo"
+            src="../../assets/brand-logo@2x.png"
+            alt=""
+          />
         </el-col>
         <el-col :span="21">
           <el-dropdown popper-class="language-dropdown">
@@ -60,6 +65,7 @@ header {
 
 img.logo {
   width: 3.5rem;
+  cursor: pointer;
 }
 
 .el-row {

@@ -5,6 +5,7 @@ import HomeUser from "./pages/HomeUser";
 import UserProfile from "./pages/UserProfile";
 import Profile from "./pages/Profile";
 import Content from "./pages/Content";
+import AboutUs from "./pages/AboutUs";
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -31,6 +32,10 @@ const router = createRouter({
     {
       path: "/home-user",
       component: HomeUser,
+    },
+    {
+      path: "/about-us",
+      component: AboutUs,
     },
     {
       path: "/user-profile",

@@ -8,7 +8,7 @@
           </p>
         </el-col>
         <el-col :sm="24" :md="12">
-          <p>About us</p>
+          <p @click="navigate('/about-us')">About us</p>
           <p>Contact us</p>
           <p>Terms & Conditions</p>
         </el-col>
@@ -16,6 +16,16 @@
     </base-container>
   </footer>
 </template>
+
+<script>
+export default {
+  methods: {
+    navigate(path) {
+      this.$router.push(path);
+    },
+  },
+};
+</script>
 
 <style scoped>
 footer {
