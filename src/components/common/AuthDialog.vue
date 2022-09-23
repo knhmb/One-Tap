@@ -9,6 +9,13 @@
     >
       <Login v-if="authOption === 'login'" />
       <Register v-if="authOption === 'register'" />
+      <forgot-password
+        v-if="authOption === 'forgot-password'"
+      ></forgot-password>
+      <reset-password
+        @closeDialog="closeDialog"
+        v-if="authOption === 'reset-password'"
+      ></reset-password>
     </el-dialog>
   </section>
 </template>
@@ -16,12 +23,16 @@
 <script>
 import Login from "../Login.vue";
 import Register from "../Register.vue";
+import ForgotPassword from "../ForgotPassword.vue";
+import ResetPassword from "../ResetPassword.vue";
 
 export default {
   props: ["dialogVisible"],
   components: {
     Login,
     Register,
+    ForgotPassword,
+    ResetPassword,
   },
   data() {
     return {
@@ -55,8 +66,8 @@ export default {
       el.style.top = "50%";
     },
     closeDialog() {
-      this.$store.commit("CHANGE_AUTH_OPTION", "login");
       this.$emit("closeDialog", false);
+      this.$store.commit("CHANGE_AUTH_OPTION", "login");
     },
   },
 };
@@ -187,5 +198,11 @@ export default {
   font-weight: 600;
   letter-spacing: -0.02em;
   color: #0e74bd;
+}
+
+@media screen and (max-width: 991px) {
+  .auth :deep(.el-dialog) {
+    width: 90%;
+  }
 }
 </style>

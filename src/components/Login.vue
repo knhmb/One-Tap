@@ -29,7 +29,7 @@
         <el-form-item>
           <el-checkbox v-model="ruleForm.rememberMe" label="Remember me" />
         </el-form-item>
-        <p>Forgot Password?</p>
+        <p @click="setForgotPassword">Forgot Password?</p>
       </div>
       <el-button>Login</el-button>
       <p class="no-account">
@@ -65,6 +65,9 @@ export default {
     },
     register() {
       this.$store.commit("CHANGE_AUTH_OPTION", "register");
+    },
+    setForgotPassword() {
+      this.$store.commit("CHANGE_AUTH_OPTION", "forgot-password");
     },
   },
 };
