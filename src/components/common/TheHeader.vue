@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     openDialog() {
-      this.dialogVisible = true;
+      this.$store.commit("TOGGLE_DIALOG_VISIBLE", true);
+      // this.dialogVisible = true;
     },
   },
 };

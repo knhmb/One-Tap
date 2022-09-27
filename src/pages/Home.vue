@@ -9,5 +9,8 @@ export default {
   components: {
     Main,
   },
+  created() {
+    this.$store.commit("TOGGLE_DIALOG_VISIBLE", false);
+  },
 };
 </script>

@@ -7,6 +7,7 @@ const store = createStore({
   state() {
     return {
       authOption: "login",
+      dialogVisible: false,
     };
   },
   getters,

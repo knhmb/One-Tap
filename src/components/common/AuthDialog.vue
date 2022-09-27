@@ -27,7 +27,7 @@ import ForgotPassword from "../ForgotPassword.vue";
 import ResetPassword from "../ResetPassword.vue";
 
 export default {
-  props: ["dialogVisible"],
+  // props: ["dialogVisible"],
   components: {
     Login,
     Register,
@@ -46,6 +46,9 @@ export default {
   computed: {
     authOption() {
       return this.$store.getters.authOption;
+    },
+    dialogVisible() {
+      return this.$store.getters.dialogVisible;
     },
   },
   methods: {
@@ -66,7 +69,8 @@ export default {
       el.style.top = "50%";
     },
     closeDialog() {
-      this.$emit("closeDialog", false);
+      // this.$emit("closeDialog", false);
+      this.$store.commit("TOGGLE_DIALOG_VISIBLE", false);
       this.$store.commit("CHANGE_AUTH_OPTION", "login");
     },
   },

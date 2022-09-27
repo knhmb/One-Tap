@@ -16,7 +16,7 @@
                 video, <br />
                 article, website, contents and new releases
               </p>
-              <el-button>Get Started</el-button>
+              <el-button @click="openDialog">Get Started</el-button>
             </base-card>
           </el-col>
           <el-col class="hide-small" :sm="24" :md="7">
@@ -66,6 +66,11 @@ export default {
     Features,
     Contact,
     SaveThePlanet,
+  },
+  methods: {
+    openDialog() {
+      this.$store.commit("TOGGLE_DIALOG_VISIBLE", true);
+    },
   },
 };
 </script>
