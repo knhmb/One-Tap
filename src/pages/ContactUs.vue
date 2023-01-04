@@ -6,6 +6,7 @@
           <el-col :sm="24" :md="10">
             <base-card>
               <h2>Contact us</h2>
+              <img src="../assets/contact-us-img.png" alt="" />
             </base-card>
           </el-col>
           <el-col :sm="24" :md="14">
@@ -99,6 +100,9 @@
   border-radius: 24px;
   padding: 4rem 2rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .contact-us .card .el-row .el-col:last-of-type .card {
@@ -115,6 +119,10 @@
   line-height: 64px;
   letter-spacing: -0.02em;
   color: #262626;
+}
+
+.contact-us .card img {
+  width: 100%;
 }
 
 .contact-us .card p.heading {

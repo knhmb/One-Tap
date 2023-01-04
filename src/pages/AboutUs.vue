@@ -6,6 +6,7 @@
           <el-col :sm="24" :md="10">
             <base-card>
               <h2>About us</h2>
+              <img class="about-us-img" src="../assets/Group.png" alt="" />
             </base-card>
           </el-col>
           <el-col :sm="24" :md="14">
@@ -99,6 +100,9 @@
   border-radius: 24px;
   padding: 4rem 2rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .about-us .card .el-row .el-col:last-of-type .card {
@@ -115,6 +119,10 @@
   line-height: 64px;
   letter-spacing: -0.02em;
   color: #262626;
+}
+
+.about-us .card img {
+  width: 100%;
 }
 
 .about-us .card p.heading {

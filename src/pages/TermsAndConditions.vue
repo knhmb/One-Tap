@@ -9,6 +9,7 @@
                 Terms & <br />
                 Conditions
               </h2>
+              <img src="../assets/img.png" alt="" />
             </base-card>
           </el-col>
           <el-col :sm="24" :md="14">
@@ -102,6 +103,9 @@
   border-radius: 24px;
   padding: 4rem 2rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .terms-conditions .card .el-row .el-col:last-of-type .card {
@@ -118,6 +122,10 @@
   line-height: 64px;
   letter-spacing: -0.02em;
   color: #262626;
+}
+
+.terms-conditions .card img {
+  width: 100%;
 }
 
 .terms-conditions .card p.heading {

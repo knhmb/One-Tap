@@ -1,17 +1,17 @@
 <template>
   <the-header v-if="$route.path !== '/home-user'"></the-header>
   <router-view></router-view>
-  <the-footer v-if="$route.path !== '/home-user'"></the-footer>
+  <!-- <the-footer v-if="$route.path !== '/home-user'"></the-footer> -->
 </template>
 
 <script>
 import TheHeader from "./components/common/TheHeader.vue";
-import TheFooter from "./components/common/TheFooter.vue";
+// import TheFooter from "./components/common/TheFooter.vue";
 
 export default {
   components: {
     TheHeader,
-    TheFooter,
+    // TheFooter,
   },
 };
 </script>

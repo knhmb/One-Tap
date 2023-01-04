@@ -5,6 +5,15 @@
       <el-form>
         <el-row>
           <el-col :sm="24" :md="8">
+            <p>Account Type</p>
+          </el-col>
+          <el-col :sm="24" :md="16" style="display: block">
+            <div class="options">
+              <div class="option">Personal</div>
+              <div class="option">Business</div>
+            </div>
+          </el-col>
+          <el-col :sm="24" :md="8">
             <p>Avatar</p>
           </el-col>
           <el-col :sm="24" :md="16">
@@ -104,6 +113,37 @@ export default {
   line-height: 28px;
   color: #262626;
   margin-bottom: 2.5rem;
+}
+
+.personal-information .options {
+  display: flex;
+}
+
+.personal-information .options .option {
+  background: #f3f3f5;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 50%;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262626;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.personal-information .options .option:first-of-type {
+  margin-right: 1rem;
+}
+
+.personal-information .options .option:hover {
+  background: #0093e9;
+  color: #fff;
+  border-color: #0093e9;
 }
 
 .personal-information img.avatar {

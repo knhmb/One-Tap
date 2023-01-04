@@ -50,6 +50,12 @@
           <el-col :sm="24" :md="8">
             <save-the-planet></save-the-planet>
           </el-col>
+          <el-col :sm="24" :md="16">
+            <Copyright />
+          </el-col>
+          <el-col :sm="24" :md="8">
+            <Video />
+          </el-col>
         </el-row>
       </div>
     </base-container>
@@ -60,12 +66,16 @@
 import Features from "@/components/home/Features.vue";
 import Contact from "@/components/home/Contact.vue";
 import SaveThePlanet from "@/components/home/SaveThePlanet.vue";
+import Copyright from "@/components/home/Copyright.vue";
+import Video from "@/components/home/Video.vue";
 
 export default {
   components: {
     Features,
     Contact,
     SaveThePlanet,
+    Copyright,
+    Video,
   },
   methods: {
     openDialog() {

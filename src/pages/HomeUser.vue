@@ -6,12 +6,18 @@
       <div class="content">
         <img class="avatar" src="../assets/avatar-dummy@2x.jpg" alt="" />
         <p class="profile-name">Chan Tai Man</p>
+        <p class="profile-desc">
+          Lorem ipsum dolor sit amet consectetur Tincidunt duis eros turpis
+          facilisis sit
+        </p>
         <div class="icons">
           <img src="../assets/display-email-off@2x.png" alt="" />
           <img src="../assets/display-phone-off@2x.png" alt="" />
           <img src="../assets/display-facebook-off@2x.png" alt="" />
           <img src="../assets/display-instagram-off@2x.png" alt="" />
           <img src="../assets/display-youtube-off@2x.png" alt="" />
+          <img src="../assets/display-whatsapp-off.png" alt="" />
+          <img src="../assets/display-payme-off.png" alt="" />
         </div>
         <Content />
       </div>
@@ -82,6 +88,17 @@ export default {
   color: #ffffff;
   text-align: center;
   margin-top: 1rem;
+}
+
+.home-user p.profile-desc {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  margin: 0.5rem 0;
 }
 
 .home-user .icons img {
