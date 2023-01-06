@@ -50,6 +50,14 @@
           <el-col :sm="24" :md="8">
             <save-the-planet></save-the-planet>
           </el-col>
+          <!-- <el-col :sm="24" :md="16">
+            <Copyright />
+          </el-col>
+          <el-col :sm="24" :md="8">
+            <Video />
+          </el-col> -->
+        </el-row>
+        <el-row :gutter="1">
           <el-col :sm="24" :md="16">
             <Copyright />
           </el-col>
@@ -96,8 +104,13 @@ export default {
   padding-top: 0;
 }
 
-.home-banner .el-row:nth-of-type(2) {
+.home-banner .el-row:nth-of-type(2),
+.home-banner .el-row:nth-of-type(3) {
   margin-top: 0.09rem;
+}
+
+.home-banner .el-row:nth-of-type(3) .el-col {
+  margin-bottom: 0.09rem;
 }
 
 .home-banner .outer-container {

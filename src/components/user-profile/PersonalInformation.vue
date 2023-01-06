@@ -9,7 +9,7 @@
           </el-col>
           <el-col :sm="24" :md="16" style="display: block">
             <div class="options">
-              <div class="option">Personal</div>
+              <div @click="setOption()" class="option">Personal</div>
               <div class="option">Business</div>
             </div>
           </el-col>

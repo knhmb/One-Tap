@@ -7,7 +7,7 @@
 
 <script>
 import SocialProfileLinks from "@/components/content/SocialProfileLinks.vue";
-import AddNewContent from "@/components/content/AddNewContent.vue";
+import AddNewContent from "@/components/content/AddNewContent1.vue";
 
 export default {
   components: {
