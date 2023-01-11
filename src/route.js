@@ -8,6 +8,7 @@ import Content from "./pages/Content";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Styling from "./pages/Styling";
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -60,6 +61,11 @@ const router = createRouter({
           path: "content",
           component: Content,
           name: "content",
+        },
+        {
+          path: "styling",
+          component: Styling,
+          name: "styling",
         },
       ],
     },

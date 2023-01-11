@@ -18,6 +18,14 @@
           <img :src="contentImg" alt="" />
           <p>Content</p>
         </div>
+        <div
+          :class="{ 'is-active': $route.path === '/user-profile/styling' }"
+          @click="navigate('styling')"
+          class="pill"
+        >
+          <img :src="stylingImg" alt="" />
+          <p>Styling</p>
+        </div>
         <div @click="$router.replace('/')" class="pill">
           <img src="../assets/logout-on-off@2x.png" alt="" />
           <p>Logout</p>
@@ -43,6 +51,7 @@ export default {
     return {
       profileImg: require("../assets/profile-on-off@2x.png"),
       contentImg: require("../assets/content-off@2x.png"),
+      stylingImg: require("../assets/styling-off.png"),
     };
   },
   watch: {

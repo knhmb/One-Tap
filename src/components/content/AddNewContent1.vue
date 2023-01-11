@@ -41,13 +41,20 @@
         </el-col>
       </el-row>
       <div class="content-card">
-        <el-row style="align-items: center">
-          <el-col :span="3"> </el-col>
+        <el-row style="align-items: center" gutter="20">
+          <el-col :span="4">
+            <div class="image-box">
+              <img src="../../assets/profile-photo@2x.png" alt="" />
+            </div>
+          </el-col>
           <el-col :span="18">
             <div class="content-box">
               <div class="top">
                 <img src="../../assets/url-txt.png" alt="" />
-                <el-input v-model="input1"></el-input>
+                <el-input
+                  v-model="input1"
+                  placeholder="What travel is really like in 2020"
+                ></el-input>
               </div>
               <div class="bottom">
                 <el-upload
@@ -71,13 +78,91 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="3" style="text-align: end">
+          <el-col :span="2" style="text-align: end">
             <img
-              @mouseover="changeIcon"
-              @mouseout="defaultIcon"
+              @mouseover="changeIcon(1)"
+              @mouseout="defaultIcon(1)"
               class="delete-icon"
               @click="dialogDelete = true"
               :src="deleteIcon"
+              alt=""
+            />
+          </el-col>
+        </el-row>
+      </div>
+      <div class="content-card">
+        <el-row style="align-items: center" gutter="20">
+          <el-col :span="4">
+            <div class="image-box">
+              <img src="../../assets/profile-link@2x.png" alt="" />
+            </div>
+          </el-col>
+          <el-col :span="18">
+            <div class="content-box">
+              <div class="top">
+                <img src="../../assets/url-txt.png" alt="" />
+                <el-input
+                  v-model="input1"
+                  placeholder="What travel is really like in 2020"
+                ></el-input>
+              </div>
+              <!-- <div class="bottom"> -->
+              <div class="top">
+                <img src="../../assets/url-link@2x.png" alt="" />
+                <el-input
+                  v-model="input2"
+                  placeholder="http://www.website.com/"
+                ></el-input>
+              </div>
+              <!-- </div> -->
+            </div>
+          </el-col>
+          <el-col :span="2" style="text-align: end">
+            <img
+              @mouseover="changeIcon(2)"
+              @mouseout="defaultIcon(2)"
+              class="delete-icon"
+              @click="dialogDelete = true"
+              :src="deleteIcon2"
+              alt=""
+            />
+          </el-col>
+        </el-row>
+      </div>
+      <div class="content-card">
+        <el-row style="align-items: center" gutter="20">
+          <el-col :span="4">
+            <div class="image-box">
+              <img src="../../assets/profile-video@2x.png" alt="" />
+            </div>
+          </el-col>
+          <el-col :span="18">
+            <div class="content-box">
+              <div class="top">
+                <img src="../../assets/url-txt.png" alt="" />
+                <el-input
+                  v-model="input1"
+                  placeholder="What travel is really like in 2020"
+                ></el-input>
+              </div>
+              <!-- <div class="bottom"> -->
+              <div class="top">
+                <img src="../../assets/url-link@2x.png" alt="" />
+                <el-input
+                  v-model="input3"
+                  placeholder="http://www.website.com/"
+                ></el-input>
+              </div>
+              <!-- </div> -->
+            </div>
+          </el-col>
+          <el-col :span="2" style="text-align: end">
+            <img
+              @mouseover="changeIcon(3)"
+              @mouseout="defaultIcon(3)"
+              class="delete-icon"
+              @click="dialogDelete = true"
+              :src="deleteIcon3"
               alt=""
             />
           </el-col>
@@ -107,8 +192,12 @@ export default {
       dialogVisible: false,
       dialogDelete: false,
       upload: "",
-      input1: "What travel is really like in 2020",
+      input1: "",
+      input2: "",
+      input3: "",
       deleteIcon: require("../../assets/del@2x.png"),
+      deleteIcon2: require("../../assets/del@2x.png"),
+      deleteIcon3: require("../../assets/del@2x.png"),
     };
   },
   methods: {
@@ -121,11 +210,23 @@ export default {
       //   file.uid = genFileId;
       //   this.upload.handleStart(file);
     },
-    changeIcon() {
-      this.deleteIcon = require("../../assets/del.png");
+    changeIcon(num) {
+      if (num === 1) {
+        this.deleteIcon = require("../../assets/del.png");
+      } else if (num === 2) {
+        this.deleteIcon2 = require("../../assets/del.png");
+      } else if (num === 3) {
+        this.deleteIcon3 = require("../../assets/del.png");
+      }
     },
-    defaultIcon() {
-      this.deleteIcon = require("../../assets/del@2x.png");
+    defaultIcon(num) {
+      if (num === 1) {
+        this.deleteIcon = require("../../assets/del@2x.png");
+      } else if (num === 2) {
+        this.deleteIcon2 = require("../../assets/del@2x.png");
+      } else if (num === 3) {
+        this.deleteIcon3 = require("../../assets/del@2x.png");
+      }
     },
   },
 };
@@ -205,9 +306,27 @@ export default {
 }
 
 .add-new-content .content-card .content-box .top {
-  border-bottom: 1px solid #262626;
   padding: 0.8rem 2.5rem;
   position: relative;
+}
+
+.add-new-content .content-card .content-box .top:first-of-type {
+  border-bottom: 1px solid #262626;
+}
+
+.add-new-content .content-card .content-box .bottom .top {
+  /* padding: 0.8rem 0.5rem; */
+  width: 1.7rem;
+  position: relative;
+  padding: 0 2.5rem;
+  border: none;
+}
+
+.add-new-content .content-card .content-box .bottom .top img {
+  position: absolute;
+  top: 47%;
+  left: 0.5rem;
+  transform: translateY(-50%);
 }
 
 .add-new-content
@@ -269,5 +388,15 @@ export default {
 .add-new-content .delete-icon:hover {
   background: #f03738;
   border-color: #f03738;
+}
+
+.add-new-content .image-box {
+  background: #e9e9eb;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 2.58rem 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
