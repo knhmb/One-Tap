@@ -8,17 +8,26 @@
     </p>
     <CreateYourOwn />
     <CustomTheme />
+    <Font />
+    <Background />
+    <Share />
   </div>
 </template>
 
 <script>
 import CreateYourOwn from "@/components/styling/CreateYourOwn.vue";
 import CustomTheme from "@/components/styling/CustomTheme.vue";
+import Font from "@/components/styling/Font.vue";
+import Background from "@/components/styling/Background.vue";
+import Share from "@/components/styling/Share.vue";
 
 export default {
   components: {
     CreateYourOwn,
     CustomTheme,
+    Font,
+    Background,
+    Share,
   },
 };
 </script>
