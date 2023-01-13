@@ -11,6 +11,7 @@
     <Font />
     <Background />
     <Share />
+    <IconLibrary />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import CustomTheme from "@/components/styling/CustomTheme.vue";
 import Font from "@/components/styling/Font.vue";
 import Background from "@/components/styling/Background.vue";
 import Share from "@/components/styling/Share.vue";
+import IconLibrary from "@/components/styling/IconLibrary.vue";
 
 export default {
   components: {
@@ -28,6 +30,7 @@ export default {
     Font,
     Background,
     Share,
+    IconLibrary,
   },
 };
 </script>
