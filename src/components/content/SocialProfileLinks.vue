@@ -85,6 +85,60 @@
               </el-form-item>
             </div>
           </el-col>
+          <el-col :sm="24" :md="7">
+            <img src="../../assets/profile-whatsapp.png" alt="" />
+            <p class="label">Whatsapp</p>
+          </el-col>
+          <el-col :sm="24" :md="17">
+            <div class="input-content">
+              <div class="views">
+                <p>-</p>
+                <p>Views</p>
+              </div>
+              <img src="../../assets/url-link@2x.png" alt="" />
+              <el-form-item>
+                <el-input
+                  placeholder="https://wa.me/<YourNumber>"
+                  v-model="ruleForm.whatsapp"
+                ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :sm="24" :md="7"> </el-col>
+          <el-col :sm="24" :md="17">
+            <div class="input-content">
+              <el-form-item>
+                <el-input
+                  placeholder="Pre-written Whatsapp message"
+                  v-model="ruleForm.whatsapp2"
+                ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :sm="24" :md="7">
+            <img src="../../assets/profile-payme.png" alt="" />
+            <p class="label">Payme</p>
+          </el-col>
+          <el-col :sm="24" :md="17">
+            <div class="input-content">
+              <div class="views">
+                <p>-</p>
+                <p>Views</p>
+              </div>
+              <img src="../../assets/url-link@2x.png" alt="" />
+              <el-form-item>
+                <el-input
+                  placeholder="https://payme.hsbc/<YourName>"
+                  v-model="ruleForm.payme"
+                ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col>
+            <el-form-item>
+              <el-button>Update</el-button>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
     </div>
@@ -101,6 +155,9 @@ export default {
         facebook: "https://www.facebook.com/chantaiman1030",
         instagram: "",
         youtube: "",
+        whatsapp: "",
+        whatsapp2: "",
+        payme: "",
       },
     };
   },
@@ -204,6 +261,20 @@ export default {
   line-height: 18px;
   letter-spacing: 0.04em;
   color: rgba(38, 38, 38, 0.6);
+}
+
+.social-profile-links .el-form .el-button {
+  background: #0093e9;
+  border-radius: 40px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  border-color: #0093e9;
+  margin-left: auto;
+  padding: 1.3rem 2.5rem;
 }
 
 /* @media screen and (max-width: 991px) {

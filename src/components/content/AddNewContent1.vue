@@ -169,6 +169,7 @@
         </el-row>
       </div>
     </div>
+    <el-button class="update">Update</el-button>
   </div>
 </template>
   
@@ -398,5 +399,21 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.add-new-content .el-button.update {
+  background: #0093e9;
+  border-radius: 40px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  border-color: #0093e9;
+  margin-left: auto;
+  padding: 1.3rem 2.5rem;
+  margin-top: 2rem;
+  display: flex;
 }
 </style>

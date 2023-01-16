@@ -38,11 +38,39 @@
             </el-form-item>
           </el-col>
           <el-col :sm="24" :md="8">
+            <p>Phone</p>
+          </el-col>
+          <el-col :sm="24" :md="16">
+            <el-form-item>
+              <el-input v-model="ruleForm.phone"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :sm="24" :md="8">
             <p>Display name</p>
           </el-col>
           <el-col :sm="24" :md="16">
             <el-form-item>
               <el-input v-model="ruleForm.displayName"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :sm="24" :md="8">
+            <p>Address</p>
+          </el-col>
+          <el-col :sm="24" :md="16">
+            <el-form-item>
+              <el-input v-model="ruleForm.address"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :sm="24" :md="8">
+            <p>Description</p>
+          </el-col>
+          <el-col :sm="24" :md="16">
+            <el-form-item>
+              <el-input
+                type="textarea"
+                rows="5"
+                v-model="ruleForm.description"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -60,6 +88,11 @@ export default {
         username: "taimanchan",
         email: "chantaiman@gmail.com",
         displayName: "Chan Tai Man",
+        phone: "9876 5432",
+        address:
+          "Unit 3, 6/F., Tower B, Regent Centre, 63 Wo Yi Hop Road, Kwai Chung, Hong Kong",
+        description:
+          "Lorem ipsum dolor sit amet consectetur Tincidunt duis eros turpis facilisis sit",
       },
     };
   },
@@ -176,6 +209,13 @@ export default {
   border: 1px solid #262626;
   border-radius: 12px;
   padding: 0.3rem 1rem;
+}
+
+.personal-information .el-textarea :deep(.el-textarea__inner) {
+  background: #f3f3f5;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  /* padding: 0.3rem 1rem; */
 }
 
 .personal-information .el-button.update {
