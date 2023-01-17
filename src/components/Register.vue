@@ -77,6 +77,7 @@
 
 <script>
 import { ElNotification } from "element-plus";
+// import { ElNotification } from "element-plus";
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -139,24 +140,38 @@ export default {
     backToLogin() {
       this.$store.commit("CHANGE_AUTH_OPTION", "login");
     },
+    passwordChecker(password) {
+      const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      return re.test(password);
+    },
     register() {
       this.$refs.ruleFormRef.validate((valid) => {
         if (valid) {
-          const data = {
-            displayName: this.ruleForm.actualName,
-            email: this.ruleForm.email,
-            username: this.ruleForm.username,
-            password: this.ruleForm.password,
-            password2: this.ruleForm.confirmPassword,
-          };
-          this.$store.dispatch("auth/register", data).then(() => {
-            ElNotification({
-              title: "Success",
-              message: "Resgistered Successfully!",
-              type: "success",
+          const isValidPass = this.passwordChecker(this.ruleForm.password);
+          if (isValidPass) {
+            const data = {
+              displayName: this.ruleForm.actualName,
+              email: this.ruleForm.email,
+              username: this.ruleForm.username,
+              password: this.ruleForm.password,
+              password2: this.ruleForm.confirmPassword,
+            };
+            this.$store.dispatch("auth/register", data).then(() => {
+              ElNotification({
+                title: "Success",
+                message: "Resgistered Successfully!",
+                type: "success",
+              });
+              this.backToLogin();
             });
-            this.backToLogin();
-          });
+          } else {
+            ElNotification({
+              title: "Error",
+              message:
+                "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character!",
+              type: "error",
+            });
+          }
         }
       });
     },

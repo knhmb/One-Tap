@@ -7,7 +7,7 @@
       width="30%"
       :before-close="handleClose"
     >
-      <Login v-if="authOption === 'login'" />
+      <Login @closedDialog="closeDialog" v-if="authOption === 'login'" />
       <Register v-if="authOption === 'register'" />
       <forgot-password
         v-if="authOption === 'forgot-password'"

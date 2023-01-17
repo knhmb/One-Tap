@@ -5,7 +5,7 @@
     <base-container>
       <div class="content">
         <img class="avatar" src="../assets/avatar-dummy@2x.jpg" alt="" />
-        <p class="profile-name">Chan Tai Man</p>
+        <p class="profile-name">{{ currentUserDetails.displayName }}</p>
         <p class="profile-desc">
           Lorem ipsum dolor sit amet consectetur Tincidunt duis eros turpis
           facilisis sit
@@ -31,6 +31,11 @@ import Content from "@/components/home-user/Content.vue";
 export default {
   components: {
     Content,
+  },
+  computed: {
+    currentUserDetails() {
+      return this.$store.getters["auth/currentUserDetails"];
+    },
   },
 };
 </script>

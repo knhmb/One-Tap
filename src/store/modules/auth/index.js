@@ -5,7 +5,10 @@ import actions from "./actions";
 export default {
   namespaced: true,
   state() {
-    return {};
+    return {
+      currentUserDetails: [],
+      isLoggedIn: false,
+    };
   },
   getters,
   mutations,

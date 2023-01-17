@@ -3,8 +3,8 @@
   <div class="login">
     <h3>Welcome</h3>
     <p class="login-message">Login to your ONE TAP account</p>
-    <el-form>
-      <el-form-item>
+    <el-form :rules="rules" :model="ruleForm" ref="ruleFormRef">
+      <el-form-item prop="username">
         <p class="label-username">Username</p>
         <el-input
           v-model="ruleForm.username"
@@ -14,7 +14,7 @@
           @focus="focus('.label-username')"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <p class="label-password">Password</p>
         <el-input
           type="password"
@@ -32,7 +32,7 @@
         </el-form-item>
         <p @click="setForgotPassword">Forgot Password?</p>
       </div>
-      <el-button>Login</el-button>
+      <el-button @click="login">Login</el-button>
       <p class="no-account">
         Don’t have an account? <span @click="register">Sign up</span>
       </p>
@@ -49,6 +49,14 @@ export default {
         username: "",
         password: "",
         rememberMe: false,
+      },
+      rules: {
+        username: [
+          { required: true, message: "Username is required!", trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: "Password is required!", trigger: "blur" },
+        ],
       },
     };
   },
@@ -69,6 +77,20 @@ export default {
     },
     setForgotPassword() {
       this.$store.commit("CHANGE_AUTH_OPTION", "forgot-password");
+    },
+    login() {
+      this.$refs.ruleFormRef.validate((valid) => {
+        if (valid) {
+          const data = {
+            username: this.ruleForm.username,
+            password: this.ruleForm.password,
+          };
+          this.$store.dispatch("auth/login", data).then(() => {
+            this.$emit("closedDialog");
+            this.$router.replace("/home-user");
+          });
+        }
+      });
     },
   },
 };
