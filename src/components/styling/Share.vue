@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="share">
     <img src="../../assets/Frame-190.png" alt="" />

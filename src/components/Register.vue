@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="register">
     <div class="return" @click="backToLogin">
@@ -6,8 +7,8 @@
     </div>
     <p class="create-account">Create your account</p>
     <p class="info">Please enter your information below</p>
-    <el-form>
-      <el-form-item>
+    <el-form :rules="rules" :model="ruleForm" ref="ruleFormRef">
+      <el-form-item prop="username">
         <p class="label-username">Username</p>
         <el-input
           v-model="ruleForm.username"
@@ -17,7 +18,7 @@
           @focus="focus('.label-username')"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="actualName">
         <p class="label-actual-name">Display name</p>
         <el-input
           v-model="ruleForm.actualName"
@@ -30,7 +31,7 @@
           @focus="focus('.label-actual-name')"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="email">
         <p class="label-email">Email</p>
         <el-input
           v-model="ruleForm.email"
@@ -38,7 +39,7 @@
           @focus="focus('.label-email')"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <p class="label-password">Password</p>
         <el-input
           type="password"
@@ -50,7 +51,7 @@
           @focus="focus('.label-password')"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="confirmPassword">
         <p class="label-confirm-password">Confirm password</p>
         <el-input
           type="password"
@@ -69,14 +70,36 @@
         By creating an account you are agreeing to our
         <span>Terms and Conditions</span>
       </p>
-      <el-button>Register</el-button>
+      <el-button @click="register">Register</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 export default {
   data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Password is required!"));
+      } else {
+        if (this.ruleForm.confirmPassword !== "") {
+          if (!this.$refs.ruleFormRef) return;
+          this.$refs.ruleFormRef.validateField("confirmPassword", () => null);
+        }
+        callback();
+      }
+    };
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please enter the password again."));
+      } else if (value !== this.ruleForm.password) {
+        callback(new Error("Passwords do not match!"));
+      } else {
+        callback();
+      }
+    };
+
     return {
       ruleForm: {
         username: "",
@@ -84,6 +107,20 @@ export default {
         confirmPassword: "",
         actualName: "",
         email: "",
+      },
+      rules: {
+        username: [
+          { required: true, message: "Username is required!", trigger: "blur" },
+        ],
+        password: [{ validator: validatePass, trigger: "blur" }],
+        confirmPassword: [{ validator: validateConfirmPass, trigger: "blur" }],
+        actualName: [
+          { required: true, message: "Name is required!", trigger: "blur" },
+        ],
+        email: [
+          { required: true, message: "Email is required!", trigger: "blur" },
+          { type: "email", message: "Please enter a valid email." },
+        ],
       },
     };
   },
@@ -101,6 +138,27 @@ export default {
     },
     backToLogin() {
       this.$store.commit("CHANGE_AUTH_OPTION", "login");
+    },
+    register() {
+      this.$refs.ruleFormRef.validate((valid) => {
+        if (valid) {
+          const data = {
+            displayName: this.ruleForm.actualName,
+            email: this.ruleForm.email,
+            username: this.ruleForm.username,
+            password: this.ruleForm.password,
+            password2: this.ruleForm.confirmPassword,
+          };
+          this.$store.dispatch("auth/register", data).then(() => {
+            ElNotification({
+              title: "Success",
+              message: "Resgistered Successfully!",
+              type: "success",
+            });
+            this.backToLogin();
+          });
+        }
+      });
     },
   },
 };

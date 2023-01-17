@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="user-profile-content">
     <social-profile-links></social-profile-links>

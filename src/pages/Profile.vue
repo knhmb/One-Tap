@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <personal-information></personal-information>
   <change-password></change-password>
