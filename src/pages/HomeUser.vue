@@ -4,20 +4,70 @@
     <img class="right-dot" src="../assets/digital-dot-right@2x.jpg" alt="" />
     <base-container>
       <div class="content">
-        <img class="avatar" src="../assets/avatar-dummy@2x.jpg" alt="" />
-        <p class="profile-name">{{ currentUserDetails.displayName }}</p>
+        <img class="avatar" :src="userDetails.item.avatar" alt="" />
+        <p class="profile-name">{{ userDetails.item.displayName }}</p>
         <p class="profile-desc">
+          {{ userDetails.description }}
+        </p>
+        <!-- <p class="profile-desc">
           Lorem ipsum dolor sit amet consectetur Tincidunt duis eros turpis
           facilisis sit
-        </p>
+        </p> -->
         <div class="icons">
-          <img src="../assets/display-email-off@2x.png" alt="" />
-          <img src="../assets/display-phone-off@2x.png" alt="" />
-          <img src="../assets/display-facebook-off@2x.png" alt="" />
-          <img src="../assets/display-instagram-off@2x.png" alt="" />
-          <img src="../assets/display-youtube-off@2x.png" alt="" />
-          <img src="../assets/display-whatsapp-off.png" alt="" />
-          <img src="../assets/display-payme-off.png" alt="" />
+          <!-- <img
+            @click="redirect(social.href)"
+            v-for="social in userDetails.resources.social"
+            :key="social.id"
+            src="../assets/display-email-off@2x.png"
+            alt=""
+          /> -->
+          <template
+            v-for="social in userDetails.resources.social"
+            :key="social.id"
+          >
+            <img
+              v-if="social.media === 'Email'"
+              @click="redirect(social.href)"
+              src="../assets/display-email-off@2x.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'Phone'"
+              @click="redirect(social.href)"
+              src="../assets/display-phone-off@2x.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'Facebook'"
+              @click="redirect(social.href)"
+              src="../assets/display-facebook-off@2x.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'Instagram'"
+              @click="redirect(social.href)"
+              src="../assets/display-instagram-off@2x.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'Youtube'"
+              @click="redirect(social.href)"
+              src="../assets/display-youtube-off@2x.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'WhatsApp'"
+              @click="redirect(social.href)"
+              src="../assets/display-whatsapp-off.png"
+              alt=""
+            />
+            <img
+              v-if="social.media === 'PayMe'"
+              @click="redirect(social.href)"
+              src="../assets/display-payme-off.png"
+              alt=""
+            />
+          </template>
         </div>
         <Content />
       </div>
@@ -27,6 +77,7 @@
 
 <script>
 import Content from "@/components/home-user/Content.vue";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -36,6 +87,51 @@ export default {
     currentUserDetails() {
       return this.$store.getters["auth/currentUserDetails"];
     },
+    userDetails() {
+      return this.$store.getters["profile/userDetails"];
+    },
+    protocol() {
+      return window.location.protocol;
+    },
+    hostname() {
+      return window.location.hostname;
+    },
+  },
+  methods: {
+    redirect(path) {
+      console.log(path);
+      console.log(`${this.protocol}//${this.hostname}${path}`);
+      // window.location.href = `${this.protocol}//${this.hostname}${path}`;
+    },
+  },
+  created() {
+    this.$store
+      .dispatch("auth/checkAccessToken")
+      .then(() => {
+        this.$store.dispatch(
+          "profile/getUserDetails",
+          this.currentUserDetails.id
+        );
+      })
+      .catch(() => {
+        this.$store
+          .dispatch("auth/checkRefreshToken")
+          .then(() => {
+            this.$store.dispatch(
+              "profile/getUserDetails",
+              this.currentUserDetails.id
+            );
+          })
+          .catch(() => {
+            ElNotification({
+              title: "Error",
+              message: "Token expired! Please login again.",
+              type: "error",
+            });
+            this.$store.dispatch("auth/logout");
+            // this.$router.replace('/')
+          });
+      });
   },
 };
 </script>
@@ -82,6 +178,7 @@ export default {
   filter: drop-shadow(0px 17px 24px rgba(60, 119, 104, 0.24));
   border-radius: 120px;
   width: 5rem;
+  height: 5rem;
 }
 
 .home-user p.profile-name {
@@ -112,6 +209,7 @@ export default {
   border-radius: 100%;
   padding: 0.3rem;
   margin: 1rem 0 1.5rem 0;
+  cursor: pointer;
 }
 
 .home-user .icons img:not(:last-of-type) {

@@ -12,6 +12,7 @@ export default {
   },
   created() {
     this.$store.commit("TOGGLE_DIALOG_VISIBLE", false);
+    this.$store.dispatch("dashboard/getContents");
   },
 };
 </script>

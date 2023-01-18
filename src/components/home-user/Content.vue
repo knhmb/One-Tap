@@ -1,60 +1,72 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="home-user-content">
-    <el-collapse v-model="activeName" accordion>
-      <el-collapse-item name="1">
-        <template #title>
-          <img
-            class="video-icon"
-            src="../../assets/display-video@2x.png"
-            alt=""
-          />
-          <p>What is One Tap?</p>
-        </template>
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
-      </el-collapse-item>
-      <el-collapse-item name="2">
-        <template #title>
-          <img
-            class="video-icon"
-            src="../../assets/display-video@2x.png"
-            alt=""
-          />
-          <p>Zanzibar 2020, Tanzania</p>
-        </template>
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
-      </el-collapse-item>
-      <el-collapse-item name="3">
-        <template #title>
-          <img
-            class="video-icon"
-            src="../../assets/display-video@2x.png"
-            alt=""
-          />
-          <p>10 Best Places to Visit in Canada</p>
-        </template>
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
-      </el-collapse-item>
-    </el-collapse>
-    <div class="collapse">
-      <img src="../../assets/display-photo@2x.png" alt="" />
-      <p>Travel photo - part 1</p>
-    </div>
-    <div class="collapse">
-      <img src="../../assets/display-photo@2x.png" alt="" />
-      <p>Travel photo - part 2</p>
-    </div>
-    <div class="collapse">
-      <img src="../../assets/display-link@2x.png" alt="" />
-      <p>One Tap International Limited</p>
-    </div>
-    <div class="collapse">
-      <img src="../../assets/display-link@2x.png" alt="" />
-      <p>Purchase Your One Tap DBC Now!</p>
-    </div>
+    <template v-if="userDetails.resources.content > 0">
+      <el-collapse v-model="activeName" accordion>
+        <el-collapse-item name="1">
+          <template #title>
+            <img
+              class="video-icon"
+              src="../../assets/display-video@2x.png"
+              alt=""
+            />
+            <p>What is One Tap?</p>
+          </template>
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
+        </el-collapse-item>
+        <el-collapse-item name="2">
+          <template #title>
+            <img
+              class="video-icon"
+              src="../../assets/display-video@2x.png"
+              alt=""
+            />
+            <p>Zanzibar 2020, Tanzania</p>
+          </template>
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
+        </el-collapse-item>
+        <el-collapse-item name="3">
+          <template #title>
+            <img
+              class="video-icon"
+              src="../../assets/display-video@2x.png"
+              alt=""
+            />
+            <p>10 Best Places to Visit in Canada</p>
+          </template>
+          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="collapse">
+        <img src="../../assets/display-photo@2x.png" alt="" />
+        <p>Travel photo - part 1</p>
+      </div>
+      <div class="collapse">
+        <img src="../../assets/display-photo@2x.png" alt="" />
+        <p>Travel photo - part 2</p>
+      </div>
+      <div class="collapse">
+        <img src="../../assets/display-link@2x.png" alt="" />
+        <p>One Tap International Limited</p>
+      </div>
+      <div class="collapse">
+        <img src="../../assets/display-link@2x.png" alt="" />
+        <p>Purchase Your One Tap DBC Now!</p>
+      </div>
+    </template>
     <img src="../../assets/brand-logo@2x.png" class="logo" alt="" />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    userDetails() {
+      return this.$store.getters["profile/userDetails"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .home-user-content {
@@ -146,5 +158,7 @@
   margin: 0 auto;
   display: block;
   margin-top: 3rem;
+  margin-top: auto;
+  height: 100%;
 }
 </style>
