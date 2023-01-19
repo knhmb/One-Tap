@@ -34,7 +34,8 @@
             <el-upload
               v-model:file-list="fileList"
               class="upload-demo"
-              action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+              :action="`${protocol}//${hostname}/api/v1/system/uploads`"
+              :on-success="handleAvatarSuccess"
             >
               <el-button type="primary">Choose photo</el-button>
               <!-- <template #tip>
@@ -143,6 +144,12 @@ export default {
     userDetails() {
       return this.$store.getters["profile/userDetails"];
     },
+    protocol() {
+      return window.location.protocol;
+    },
+    hostname() {
+      return window.location.hostname;
+    },
   },
   methods: {
     setOption(option) {
@@ -150,9 +157,9 @@ export default {
     },
     handleAvatarSuccess(response, uploadFile) {
       console.log(response);
-      this.imgSrc = response.item.name;
+      // this.imgSrc = response.item.name;
       // this.getImageFilename(this.imgSrc);
-      this.sendAvatar(this.imgSrc);
+      this.sendAvatar(response.item.name);
       console.log(uploadFile);
     },
     sendAvatar(data) {
@@ -162,15 +169,14 @@ export default {
           this.$store
             .dispatch("profile/updateUserAvatar", {
               avatar: `${this.protocol}//${this.hostname}/api/v1/system/uploads/${data}`,
-              id: this.currentUserDetails.id,
+              id: this.userDetails.item.id,
             })
             .then(() => {
               this.avatarLoaded = false;
               this.$store
-                .dispatch("profile/getUser", this.currentUserDetails.id)
+                .dispatch("profile/getUserDetails", this.userDetails.item.id)
                 .then(() => {
-                  this.avatarLoaded = true;
-
+                  // this.avatarLoaded = true;
                   // this.imgSrc = this.userDetails.avatar;
                 });
             });
@@ -182,11 +188,14 @@ export default {
               this.$store
                 .dispatch("profile/updateUserAvatar", {
                   avatar: `${this.protocol}//${this.hostname}/api/v1/system/uploads/${data}`,
-                  id: this.currentUserDetails.id,
+                  id: this.userDetails.item.id,
                 })
                 .then(() => {
                   this.$store
-                    .dispatch("profile/getUser", this.currentUserDetails.id)
+                    .dispatch(
+                      "profile/getUserDetails",
+                      this.userDetails.item.id
+                    )
                     .then(() => {
                       // this.imgSrc = this.userDetails.avatar;
                     });
@@ -195,7 +204,7 @@ export default {
             .catch(() => {
               ElNotification({
                 title: "Error",
-                message: "Token Expired! Please Login Again.",
+                message: "Token expired! Please login again.",
                 type: "error",
               });
               this.$store.dispatch("auth/logout");
@@ -360,7 +369,9 @@ export default {
 
 .personal-information img.avatar {
   width: 4rem;
+  height: 4rem;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 .personal-information img.delete {
