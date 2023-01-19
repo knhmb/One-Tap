@@ -2,16 +2,19 @@
   <section class="contact-us">
     <base-container>
       <div class="card">
-        <el-row :gutter="1">
-          <el-col :sm="24" :md="10">
-            <base-card>
-              <h2>Contact us</h2>
-              <img src="../assets/contact-us-img.png" alt="" />
-            </base-card>
-          </el-col>
-          <el-col :sm="24" :md="14">
-            <base-card>
-              <p class="heading">Heading</p>
+        <template v-for="content in contents" :key="content.id">
+          <el-row :gutter="1" v-if="content.slug === 'static-page-contact-us'">
+            <el-col :sm="24" :md="10">
+              <base-card>
+                <h2>{{ content.title }}</h2>
+                <img src="../assets/contact-us-img.png" alt="" />
+              </base-card>
+            </el-col>
+            <el-col :sm="24" :md="14">
+              <base-card>
+                <div v-html="content.content"></div>
+
+                <!-- <p class="heading">Heading</p>
 
               <p class="description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -71,14 +74,25 @@
                 elementum ipsum amet, malesuada vel quisque. Sit dolor, nisi
                 velit vestibulum. Aliquet sit dui mattis porta mauris cursus
                 sociis egestas molestie.
-              </p>
-            </base-card>
-          </el-col>
-        </el-row>
+              </p> -->
+              </base-card>
+            </el-col>
+          </el-row>
+        </template>
       </div>
     </base-container>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    contents() {
+      return this.$store.getters["dashboard/contents"];
+    },
+  },
+};
+</script>
   
   <style scoped>
 .contact-us {

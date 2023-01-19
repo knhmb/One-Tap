@@ -17,7 +17,7 @@ export default {
 
     const response = await axios.delete("/api/v1/authenticate", {
       headers: {
-        Authoriation: `Bearer ${userToken}`,
+        Authorization: `Bearer ${userToken}`,
       },
     });
     console.log(response);

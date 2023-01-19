@@ -26,7 +26,7 @@
           <img :src="stylingImg" alt="" />
           <p>Styling</p>
         </div>
-        <div @click="$router.replace('/')" class="pill">
+        <div @click="logout" class="pill">
           <img src="../assets/logout-on-off@2x.png" alt="" />
           <p>Logout</p>
         </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 export default {
   data() {
     return {
@@ -71,6 +72,28 @@ export default {
   methods: {
     navigate(path) {
       this.$router.push({ name: path });
+    },
+    logout() {
+      this.$store
+        .dispatch("auth/checkAccessToken")
+        .then(() => {
+          this.$store.dispatch("auth/logout");
+        })
+        .catch(() => {
+          this.$store
+            .dispatch("auth/checkRefreshToken")
+            .then(() => {
+              this.$store.dispatch("auth/logout");
+            })
+            .catch(() => {
+              ElNotification({
+                title: "Error",
+                message: "Token expired! Please login again.",
+                type: "error",
+              });
+              this.$store.dispatch("auth/logout");
+            });
+        });
     },
   },
   created() {

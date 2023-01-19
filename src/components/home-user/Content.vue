@@ -54,7 +54,12 @@
         <p>Purchase Your One Tap DBC Now!</p>
       </div>
     </template>
-    <img src="../../assets/brand-logo@2x.png" class="logo" alt="" />
+    <img
+      @click="$router.push('/user-profile/profile')"
+      src="../../assets/brand-logo@2x.png"
+      class="logo"
+      alt=""
+    />
   </div>
 </template>
 
@@ -160,5 +165,6 @@ export default {
   margin-top: 3rem;
   margin-top: auto;
   height: 100%;
+  cursor: pointer;
 }
 </style>

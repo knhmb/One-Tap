@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-  async getContents() {
+  async getContents(context) {
     const response = await axios.get("/api/v1/cms/contents");
-    console.log(response);
+    context.commit("SET_CONTENTS", response.data.items);
   },
 };

@@ -2,83 +2,96 @@
   <section class="about-us">
     <base-container>
       <div class="card">
-        <el-row :gutter="1">
-          <el-col :sm="24" :md="10">
-            <base-card>
-              <h2>About us</h2>
-              <img class="about-us-img" src="../assets/Group.png" alt="" />
-            </base-card>
-          </el-col>
-          <el-col :sm="24" :md="14">
-            <base-card>
-              <p class="heading">Heading</p>
+        <template v-for="content in contents" :key="content.id">
+          <el-row :gutter="1" v-if="content.slug === 'static-page-about-us'">
+            <el-col :sm="24" :md="10">
+              <base-card>
+                <h2>{{ content.title }}</h2>
+                <img class="about-us-img" src="../assets/Group.png" alt="" />
+              </base-card>
+            </el-col>
+            <el-col :sm="24" :md="14">
+              <base-card>
+                <div v-html="content.content"></div>
+                <!-- <p class="heading">Heading</p>
 
-              <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
-                semper tempus, tortor. Massa tellus enim, adipiscing eu
-                scelerisque vel pellentesque. Iaculis varius faucibus purus sit.
-                Scelerisque turpis aliquam lectus neque sed tempus suspendisse
-                quam. Amet amet nunc malesuada sit. Dolor cursus arcu augue
-                vestibulum viverra gravida sit euismod velit. Mi, laoreet est
-                nunc nullam sed massa suspendisse in. Pharetra adipiscing sed
-                bibendum lacus senectus. Ornare vel scelerisque quis facilisis
-                faucibus egestas ullamcorper mauris. Odio tincidunt duis neque
-                in pulvinar nec, turpis ac. Condimentum venenatis nunc ante
-                elementum ipsum amet, malesuada vel quisque. Sit dolor, nisi
-                velit vestibulum. Aliquet sit dui mattis porta mauris cursus
-                sociis egestas molestie.
-              </p>
-              <p class="description">
-                Odio sit enim pretium nibh facilisis risus aenean. Volutpat, nec
-                purus enim velit nunc nullam. Proin quis habitasse turpis massa
-                volutpat venenatis nisl. Cras ipsum sit vivamus etiam morbi
-                vestibulum tristique. Urna, quis libero lacinia in arcu, morbi
-                augue.
-              </p>
-              <p class="heading">Heading</p>
+                <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
+                  semper tempus, tortor. Massa tellus enim, adipiscing eu
+                  scelerisque vel pellentesque. Iaculis varius faucibus purus
+                  sit. Scelerisque turpis aliquam lectus neque sed tempus
+                  suspendisse quam. Amet amet nunc malesuada sit. Dolor cursus
+                  arcu augue vestibulum viverra gravida sit euismod velit. Mi,
+                  laoreet est nunc nullam sed massa suspendisse in. Pharetra
+                  adipiscing sed bibendum lacus senectus. Ornare vel scelerisque
+                  quis facilisis faucibus egestas ullamcorper mauris. Odio
+                  tincidunt duis neque in pulvinar nec, turpis ac. Condimentum
+                  venenatis nunc ante elementum ipsum amet, malesuada vel
+                  quisque. Sit dolor, nisi velit vestibulum. Aliquet sit dui
+                  mattis porta mauris cursus sociis egestas molestie.
+                </p>
+                <p class="description">
+                  Odio sit enim pretium nibh facilisis risus aenean. Volutpat,
+                  nec purus enim velit nunc nullam. Proin quis habitasse turpis
+                  massa volutpat venenatis nisl. Cras ipsum sit vivamus etiam
+                  morbi vestibulum tristique. Urna, quis libero lacinia in arcu,
+                  morbi augue.
+                </p>
+                <p class="heading">Heading</p>
 
-              <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
-                semper tempus, tortor. Massa tellus enim, adipiscing eu
-                scelerisque vel pellentesque. Iaculis varius faucibus purus sit.
-                Scelerisque turpis aliquam lectus neque sed tempus suspendisse
-                quam. Amet amet nunc malesuada sit. Dolor cursus arcu augue
-                vestibulum viverra gravida sit euismod velit. Mi, laoreet est
-                nunc nullam sed massa suspendisse in. Pharetra adipiscing sed
-                bibendum lacus senectus. Ornare vel scelerisque quis facilisis
-                faucibus egestas ullamcorper mauris. Odio tincidunt duis neque
-                in pulvinar nec, turpis ac. Condimentum venenatis nunc ante
-                elementum ipsum amet, malesuada vel quisque. Sit dolor, nisi
-                velit vestibulum. Aliquet sit dui mattis porta mauris cursus
-                sociis egestas molestie.
-              </p>
-              <p class="heading">Heading</p>
+                <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
+                  semper tempus, tortor. Massa tellus enim, adipiscing eu
+                  scelerisque vel pellentesque. Iaculis varius faucibus purus
+                  sit. Scelerisque turpis aliquam lectus neque sed tempus
+                  suspendisse quam. Amet amet nunc malesuada sit. Dolor cursus
+                  arcu augue vestibulum viverra gravida sit euismod velit. Mi,
+                  laoreet est nunc nullam sed massa suspendisse in. Pharetra
+                  adipiscing sed bibendum lacus senectus. Ornare vel scelerisque
+                  quis facilisis faucibus egestas ullamcorper mauris. Odio
+                  tincidunt duis neque in pulvinar nec, turpis ac. Condimentum
+                  venenatis nunc ante elementum ipsum amet, malesuada vel
+                  quisque. Sit dolor, nisi velit vestibulum. Aliquet sit dui
+                  mattis porta mauris cursus sociis egestas molestie.
+                </p>
+                <p class="heading">Heading</p>
 
-              <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
-                semper tempus, tortor. Massa tellus enim, adipiscing eu
-                scelerisque vel pellentesque. Iaculis varius faucibus purus sit.
-                Scelerisque turpis aliquam lectus neque sed tempus suspendisse
-                quam. Amet amet nunc malesuada sit. Dolor cursus arcu augue
-                vestibulum viverra gravida sit euismod velit. Mi, laoreet est
-                nunc nullam sed massa suspendisse in. Pharetra adipiscing sed
-                bibendum lacus senectus. Ornare vel scelerisque quis facilisis
-                faucibus egestas ullamcorper mauris. Odio tincidunt duis neque
-                in pulvinar nec, turpis ac. Condimentum venenatis nunc ante
-                elementum ipsum amet, malesuada vel quisque. Sit dolor, nisi
-                velit vestibulum. Aliquet sit dui mattis porta mauris cursus
-                sociis egestas molestie.
-              </p>
-            </base-card>
-          </el-col>
-        </el-row>
+                <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Scelerisque et vulputate neque nec. Pulvinar sapien, volutpat
+                  semper tempus, tortor. Massa tellus enim, adipiscing eu
+                  scelerisque vel pellentesque. Iaculis varius faucibus purus
+                  sit. Scelerisque turpis aliquam lectus neque sed tempus
+                  suspendisse quam. Amet amet nunc malesuada sit. Dolor cursus
+                  arcu augue vestibulum viverra gravida sit euismod velit. Mi,
+                  laoreet est nunc nullam sed massa suspendisse in. Pharetra
+                  adipiscing sed bibendum lacus senectus. Ornare vel scelerisque
+                  quis facilisis faucibus egestas ullamcorper mauris. Odio
+                  tincidunt duis neque in pulvinar nec, turpis ac. Condimentum
+                  venenatis nunc ante elementum ipsum amet, malesuada vel
+                  quisque. Sit dolor, nisi velit vestibulum. Aliquet sit dui
+                  mattis porta mauris cursus sociis egestas molestie.
+                </p> -->
+              </base-card>
+            </el-col>
+          </el-row>
+        </template>
       </div>
     </base-container>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    contents() {
+      return this.$store.getters["dashboard/contents"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .about-us {
@@ -90,10 +103,6 @@
   min-height: 100vh;
   padding: 1px;
 }
-
-/* .about-us .card .el-row .el-col {
-  padding: 4rem 2rem;
-} */
 
 .about-us .card .el-row .el-col:first-of-type .card {
   background: #d5f7e8;

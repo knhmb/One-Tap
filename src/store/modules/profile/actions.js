@@ -11,4 +11,18 @@ export default {
     });
     context.commit("SET_USER_DETAILS", response.data);
   },
+  async updateUserDetails(_, payload) {
+    const userToken = localStorage.getItem("accessToken");
+
+    const response = await axios.put(
+      `/api/v1/accounts/${payload.id}`,
+      payload.data,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+    console.log(response);
+  },
 };

@@ -101,7 +101,7 @@ export default {
     redirect(path) {
       console.log(path);
       console.log(`${this.protocol}//${this.hostname}${path}`);
-      // window.location.href = `${this.protocol}//${this.hostname}${path}`;
+      window.location.href = `${this.protocol}//${this.hostname}${path}`;
     },
   },
   created() {
