@@ -385,6 +385,7 @@ export default {
 
       this.dynamicContent.forEach((item) => {
         finalData.push({
+          id: item.id,
           title: item.title,
           content: item.content.toString(),
           format: item.format,
