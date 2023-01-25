@@ -36,6 +36,9 @@
 </template>
 
 <style scoped>
+.copyright {
+  height: 100%;
+}
 .copyright img {
   width: 3.5rem;
 }

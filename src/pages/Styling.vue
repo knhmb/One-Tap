@@ -22,6 +22,7 @@ import Font from "@/components/styling/Font.vue";
 import Background from "@/components/styling/Background.vue";
 import Share from "@/components/styling/Share.vue";
 import IconLibrary from "@/components/styling/IconLibrary.vue";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -31,6 +32,28 @@ export default {
     Background,
     Share,
     IconLibrary,
+  },
+  created() {
+    this.$store
+      .dispatch("auth/checkAccessToken")
+      .then(() => {
+        this.$store.dispatch("profile/getButtons");
+      })
+      .catch(() => {
+        this.$store
+          .dispatch("auth/checkRefreshToken")
+          .then(() => {
+            this.$store.dispatch("profile/getButtons");
+          })
+          .catch(() => {
+            ElNotification({
+              title: "Error",
+              message: "Token expired! Please login again.",
+              type: "error",
+            });
+            this.$store.dispatch("auth/logout");
+          });
+      });
   },
 };
 </script>

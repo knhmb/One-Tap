@@ -7,6 +7,8 @@ export default {
   state() {
     return {
       userDetails: [],
+      accountSocials: [],
+      buttons: [],
     };
   },
   getters,

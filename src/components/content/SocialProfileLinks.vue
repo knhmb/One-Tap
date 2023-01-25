@@ -4,139 +4,158 @@
       <h2>Social profile links</h2>
       <el-form>
         <el-row>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-email@2x.png" alt="" />
-            <p class="label">Email</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input v-model="ruleForm.email"></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-phone@2x.png" alt="" />
-            <p class="label">Phone</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input
-                  placeholder="Your phone number"
-                  v-model="ruleForm.phoneNo"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-facebook@2x.png" alt="" />
-            <p class="label">Facebook</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <div class="views">
-                <p>9798</p>
-                <p>Views</p>
-              </div>
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input v-model="ruleForm.facebook"></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-instagram@2x.png" alt="" />
-            <p class="label">Instagram</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <div class="views">
-                <p>-</p>
-                <p>Views</p>
-              </div>
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input
-                  placeholder="https://www.instagram.com/<yourIGid>"
-                  v-model="ruleForm.instagram"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-youtube@2x.png" alt="" />
-            <p class="label">Youtube</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <div class="views">
-                <p>-</p>
-                <p>Views</p>
-              </div>
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input
-                  placeholder="http://www.youtube.com/channel/<Yourchannel>"
-                  v-model="ruleForm.youtube"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-whatsapp.png" alt="" />
-            <p class="label">Whatsapp</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <div class="views">
-                <p>-</p>
-                <p>Views</p>
-              </div>
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input
-                  placeholder="https://wa.me/<YourNumber>"
-                  v-model="ruleForm.whatsapp"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7"> </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <el-form-item>
-                <el-input
-                  placeholder="Pre-written Whatsapp message"
-                  v-model="ruleForm.whatsapp2"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :sm="24" :md="7">
-            <img src="../../assets/profile-payme.png" alt="" />
-            <p class="label">Payme</p>
-          </el-col>
-          <el-col :sm="24" :md="17">
-            <div class="input-content">
-              <div class="views">
-                <p>-</p>
-                <p>Views</p>
-              </div>
-              <img src="../../assets/url-link@2x.png" alt="" />
-              <el-form-item>
-                <el-input
-                  placeholder="https://payme.hsbc/<YourName>"
-                  v-model="ruleForm.payme"
-                ></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
+          <template
+            v-for="social in userDetails.resources.social"
+            :key="social.id"
+          >
+            <template v-if="social.media === 'Email'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-email@2x.png" alt="" />
+                <p class="label">{{ social.media }}</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input v-model="ruleForm.email"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'Phone'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-phone@2x.png" alt="" />
+                <p class="label">{{ social.media }}</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input
+                      placeholder="Your phone number"
+                      v-model="ruleForm.phoneNo"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'Facebook'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-facebook@2x.png" alt="" />
+                <p class="label">{{ social.media }}</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <div class="views">
+                    <p>{{ social.view }}</p>
+                    <p>Views</p>
+                  </div>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input v-model="ruleForm.facebook"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'Instagram'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-instagram@2x.png" alt="" />
+                <p class="label">{{ social.media }}</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <div class="views">
+                    <p>{{ social.view }}</p>
+                    <p>Views</p>
+                  </div>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input
+                      placeholder="https://www.instagram.com/<yourIGid>"
+                      v-model="ruleForm.instagram"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'Youtube'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-youtube@2x.png" alt="" />
+                <p class="label">Youtube</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <div class="views">
+                    <p>{{ social.view }}</p>
+                    <p>Views</p>
+                  </div>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input
+                      placeholder="http://www.youtube.com/channel/<Yourchannel>"
+                      v-model="ruleForm.youtube"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'WhatsApp'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-whatsapp.png" alt="" />
+                <p class="label">Whatsapp</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <div class="views">
+                    <p>{{ social.view }}</p>
+                    <p>Views</p>
+                  </div>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input
+                      placeholder="https://wa.me/<YourNumber>"
+                      v-model="ruleForm.whatsapp"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :sm="24" :md="7"> </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <el-form-item>
+                    <el-input
+                      placeholder="Pre-written Whatsapp message"
+                      v-model="ruleForm.whatsapp2"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+            <template v-if="social.media === 'PayMe'">
+              <el-col :sm="24" :md="7">
+                <img src="../../assets/profile-payme.png" alt="" />
+                <p class="label">{{ social.media }}</p>
+              </el-col>
+              <el-col :sm="24" :md="17">
+                <div class="input-content">
+                  <div class="views">
+                    <p>{{ social.view }}</p>
+                    <p>Views</p>
+                  </div>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-form-item>
+                    <el-input
+                      placeholder="https://payme.hsbc/<YourName>"
+                      v-model="ruleForm.payme"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </template>
+          </template>
           <el-col>
             <el-form-item>
-              <el-button>Update</el-button>
+              <el-button @click="updateUserSocials">Update</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -146,6 +165,7 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 export default {
   data() {
     return {
@@ -160,6 +180,133 @@ export default {
         payme: "",
       },
     };
+  },
+  computed: {
+    userDetails() {
+      return this.$store.getters["profile/userDetails"];
+    },
+  },
+  methods: {
+    updateUserSocials() {
+      const social = [
+        {
+          account: this.userDetails.item.id,
+          media: "Email",
+          content: this.ruleForm.email,
+          message: this.ruleForm.email,
+        },
+        {
+          account: this.userDetails.item.id,
+          media: "Phone",
+          content: this.ruleForm.phoneNo,
+          message: this.ruleForm.phoneNo,
+        },
+        {
+          account: this.userDetails.item.id,
+          media: "Facebook",
+          content: this.ruleForm.facebook,
+          message: this.ruleForm.facebook,
+        },
+        {
+          account: this.userDetails.item.id,
+          media: "Instagram",
+          content: this.ruleForm.instagram,
+          message: this.ruleForm.instagram,
+        },
+        {
+          account: this.userDetails.item.id,
+          media: "WhatsApp",
+          content: this.ruleForm.whatsapp,
+          message: this.ruleForm.whatsapp2,
+        },
+        {
+          account: this.userDetails.item.id,
+          media: "PayMe",
+          content: this.ruleForm.payme,
+          message: this.ruleForm.payme,
+        },
+      ];
+      // const emailData = {
+      //   account: this.userDetails.item.id,
+      //   media: "Email",
+      //   content: this.ruleForm.email,
+      // };
+      this.$store
+        .dispatch("auth/checkAccessToken")
+        .then(() => {
+          this.$store
+            .dispatch("profile/updateUserDetails", {
+              data: { social },
+              id: this.userDetails.item.id,
+            })
+            .then(() => {
+              this.$store
+                .dispatch("profile/getUserDetails", this.userDetails.item.id)
+                .then(() => {
+                  ElNotification({
+                    title: "Success",
+                    message: "Data updated!",
+                    type: "success",
+                  });
+                });
+            });
+        })
+        .catch(() => {
+          this.$store
+            .dispatch("auth/checkRefreshToken")
+            .then(() => {
+              this.$store
+                .dispatch("profile/updateUserDetails", {
+                  data: { social },
+                  id: this.userDetails.item.id,
+                })
+                .then(() => {
+                  this.$store
+                    .dispatch(
+                      "profile/getUserDetails",
+                      this.userDetails.item.id
+                    )
+                    .then(() => {
+                      ElNotification({
+                        title: "Success",
+                        message: "Data updated!",
+                        type: "success",
+                      });
+                    });
+                });
+            })
+            .catch(() => {
+              ElNotification({
+                title: "Error",
+                message: "Token expired! Please login again.",
+                type: "error",
+              });
+              this.$store.dispatch("auth/logout");
+            });
+        });
+    },
+  },
+  created() {
+    this.$store
+      .dispatch("auth/checkAccessToken")
+      .then(() => {
+        this.$store.dispatch("profile/getAccountSocials");
+      })
+      .catch(() => {
+        this.$store
+          .dispatch("auth/checkRefreshToken")
+          .then(() => {
+            this.$store.dispatch("profile/getAccountSocials");
+          })
+          .catch(() => {
+            ElNotification({
+              title: "Error",
+              message: "Token expired! Please login again.",
+              type: "error",
+            });
+            this.$store.dispatch("auth/logout");
+          });
+      });
   },
 };
 </script>

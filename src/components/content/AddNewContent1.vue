@@ -11,7 +11,7 @@
                 <p>Link</p>
                 <p>Add link to your One tap</p>
               </div>
-              <p class="button">Add</p>
+              <p class="button" @click="addContent('link')">Add</p>
             </div>
           </div>
         </el-col>
@@ -23,7 +23,7 @@
                 <p>Photo</p>
                 <p>Add photo to your One tap</p>
               </div>
-              <p class="button">Add</p>
+              <p class="button" @click="addContent('photo')">Add</p>
             </div>
           </div>
         </el-col>
@@ -35,12 +35,65 @@
                 <p>Video</p>
                 <p>Add videos to your One tap</p>
               </div>
-              <p class="button">Add</p>
+              <p class="button" @click="addContent('video')">Add</p>
             </div>
           </div>
         </el-col>
       </el-row>
-      <div class="content-card">
+      <template v-if="dynamicContent.length > 0">
+        <div class="content-card" v-for="item in dynamicContent" :key="item.id">
+          <el-row style="align-items: center" gutter="20">
+            <el-col :span="4">
+              <div class="image-box">
+                <img :src="item.icon" alt="" />
+              </div>
+            </el-col>
+            <el-col :span="18">
+              <div class="content-box">
+                <div class="top">
+                  <img src="../../assets/url-txt.png" alt="" />
+                  <el-input
+                    v-model="item.title"
+                    placeholder="What travel is really like in 2020"
+                  ></el-input>
+                </div>
+                <div class="bottom" v-if="item.format === 'Photo'">
+                  <el-upload
+                    v-model:file-list="item.content"
+                    class="upload-demo"
+                    action="#"
+                  >
+                    <el-button type="primary">Click to upload</el-button>
+                    <!-- <template #tip>
+                    <div class="el-upload__tip">
+                      jpg/png files with a size less than 500KB.
+                    </div>
+                  </template> -->
+                  </el-upload>
+                </div>
+                <div class="top" v-else>
+                  <img src="../../assets/url-link@2x.png" alt="" />
+                  <el-input
+                    v-model="item.content"
+                    :placeholder="item.placeholder"
+                  ></el-input>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="2" style="text-align: end">
+              <img
+                @mouseover="changeIcon(1)"
+                @mouseout="defaultIcon(1)"
+                class="delete-icon"
+                @click="deleteContent(item.id)"
+                :src="item.deleteIcon"
+                alt=""
+              />
+            </el-col>
+          </el-row>
+        </div>
+      </template>
+      <!-- <div class="content-card">
         <el-row style="align-items: center" gutter="20">
           <el-col :span="4">
             <div class="image-box">
@@ -69,11 +122,6 @@
                   :on-exceed="handleExceed"
                 >
                   <el-button type="primary">Click to upload</el-button>
-                  <!-- <template #tip>
-                    <div class="el-upload__tip">
-                      jpg/png files with a size less than 500KB.
-                    </div>
-                  </template> -->
                 </el-upload>
               </div>
             </div>
@@ -89,8 +137,8 @@
             />
           </el-col>
         </el-row>
-      </div>
-      <div class="content-card">
+      </div> -->
+      <!-- <div class="content-card">
         <el-row style="align-items: center" gutter="20">
           <el-col :span="4">
             <div class="image-box">
@@ -106,7 +154,6 @@
                   placeholder="What travel is really like in 2020"
                 ></el-input>
               </div>
-              <!-- <div class="bottom"> -->
               <div class="top">
                 <img src="../../assets/url-link@2x.png" alt="" />
                 <el-input
@@ -114,7 +161,6 @@
                   placeholder="http://www.website.com/"
                 ></el-input>
               </div>
-              <!-- </div> -->
             </div>
           </el-col>
           <el-col :span="2" style="text-align: end">
@@ -128,8 +174,8 @@
             />
           </el-col>
         </el-row>
-      </div>
-      <div class="content-card">
+      </div> -->
+      <!-- <div class="content-card">
         <el-row style="align-items: center" gutter="20">
           <el-col :span="4">
             <div class="image-box">
@@ -145,7 +191,6 @@
                   placeholder="What travel is really like in 2020"
                 ></el-input>
               </div>
-              <!-- <div class="bottom"> -->
               <div class="top">
                 <img src="../../assets/url-link@2x.png" alt="" />
                 <el-input
@@ -153,7 +198,6 @@
                   placeholder="http://www.website.com/"
                 ></el-input>
               </div>
-              <!-- </div> -->
             </div>
           </el-col>
           <el-col :span="2" style="text-align: end">
@@ -167,18 +211,26 @@
             />
           </el-col>
         </el-row>
-      </div>
+      </div> -->
     </div>
-    <el-button class="update">Update</el-button>
+    <el-button class="update" @click="updateContent">Update</el-button>
+    <DeleteDialog
+      :dialogDelete="dialogDelete"
+      @closeDialog="closeDialog($event)"
+      @deleteContent="contentDeleted($event)"
+    />
   </div>
 </template>
   
   <script>
 //   import { Plus } from "@element-plus/icons-vue";
+import DeleteDialog from "./DeleteDialog.vue";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
     //   Plus,
+    DeleteDialog,
   },
   data() {
     return {
@@ -199,7 +251,15 @@ export default {
       deleteIcon: require("../../assets/del@2x.png"),
       deleteIcon2: require("../../assets/del@2x.png"),
       deleteIcon3: require("../../assets/del@2x.png"),
+      dynamicContent: [],
+      selectedId: null,
+      finalArray: [],
     };
+  },
+  computed: {
+    userDetails() {
+      return this.$store.getters["profile/userDetails"];
+    },
   },
   methods: {
     handleExceed(files, uploadFiles) {
@@ -228,6 +288,140 @@ export default {
       } else if (num === 3) {
         this.deleteIcon3 = require("../../assets/del@2x.png");
       }
+    },
+    deleteContent(id) {
+      this.dialogDelete = true;
+      this.selectedId = id;
+    },
+    contentDeleted() {
+      this.dynamicContent = this.dynamicContent.filter(
+        (item) => item.id !== this.selectedId
+      );
+    },
+    closeDialog(event) {
+      this.dialogDelete = event;
+    },
+    addContent(type) {
+      let guid = () => {
+        let s4 = () => {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        };
+        //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+        return (
+          s4() +
+          s4() +
+          "-" +
+          s4() +
+          "-" +
+          s4() +
+          "-" +
+          s4() +
+          "-" +
+          s4() +
+          s4() +
+          s4()
+        );
+      };
+      if (type === "photo") {
+        const item = {
+          id: guid(),
+          icon: require("../../assets/profile-photo@2x.png"),
+          title: "",
+          content: [],
+          deleteIcon: require("../../assets/del@2x.png"),
+          format: "Photo",
+          placeholder: "",
+          href: "",
+          view: 0,
+        };
+        this.dynamicContent.push(item);
+      } else if (type === "link") {
+        const item = {
+          id: guid(),
+          icon: require("../../assets/profile-link@2x.png"),
+          title: "",
+          content: "",
+          deleteIcon: require("../../assets/del@2x.png"),
+          format: "Link",
+          placeholder: "http://www.website.com/",
+          href: "",
+          view: 0,
+        };
+        this.dynamicContent.push(item);
+      } else if (type === "video") {
+        const item = {
+          id: guid(),
+          icon: require("../../assets/profile-video@2x.png"),
+          title: "",
+          content: "",
+          deleteIcon: require("../../assets/del@2x.png"),
+          format: "Video",
+          placeholder: "http://www.youtube.com.watch?12398127-3987123",
+          href: "",
+          view: 0,
+        };
+        this.dynamicContent.push(item);
+      }
+      console.log(this.dynamicContent);
+
+      // const finalData = [];
+
+      // this.dynamicContent.forEach((item) => {
+      //   finalData.push({
+      //     title: item.title,
+      //     content: item.content,
+      //     format: item.format,
+      //     href: item.href,
+      //     view: item.view,
+      //   });
+      // });
+      // this.finalArray = finalData;
+      // console.log(this.finalArray);
+    },
+    updateContent() {
+      const finalData = [];
+
+      this.dynamicContent.forEach((item) => {
+        finalData.push({
+          title: item.title,
+          content: item.content.toString(),
+          format: item.format,
+          href: item.href,
+          view: item.view,
+          icon: item.icon,
+        });
+      });
+      console.log(finalData);
+
+      this.$store
+        .dispatch("auth/checkAccessToken")
+        .then(() => {
+          this.$store.dispatch("profile/updateUserDetails", {
+            id: this.userDetails.item.id,
+            data: { content: finalData },
+          });
+        })
+        .catch(() => {
+          this.$store
+            .dispatch("auth/checkRefreshToken")
+            .then(() => {
+              this.$store.dispatch("profile/updateUserDetails", {
+                id: this.userDetails.item.id,
+                data: { content: finalData },
+              });
+              this.dynamicContent = [];
+            })
+            .catch(() => {
+              ElNotification({
+                title: "Error",
+                message: "Token expired! Please login again.",
+                type: "error",
+              });
+              this.$store.dispatch("auth/logout");
+            });
+        });
     },
   },
 };

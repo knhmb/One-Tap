@@ -11,7 +11,7 @@
         <el-button @click="$emit('closeDialog', false)" class="cancel"
           >Cancel</el-button
         >
-        <el-button @click="$emit('closeDialog', false)">Delete</el-button>
+        <el-button @click="deleteContent">Delete</el-button>
       </div>
     </el-dialog>
   </div>
@@ -20,6 +20,12 @@
 <script>
 export default {
   props: ["dialogDelete"],
+  methods: {
+    deleteContent() {
+      this.$emit("deleteContent");
+      this.$emit("closeDialog", false);
+    },
+  },
 };
 </script>
 
